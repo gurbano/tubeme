@@ -60,6 +60,7 @@ LinkAnchor.prototype.dragend = function(self,event){self.link.refresh();} //Redr
 LinkAnchor.prototype.rightclick = function(self,event){self.link.removeAnchor(self);} //Remove the anchor
 
 /*LINK*/
+Link.prototype.rightclick = function(self,event){self.addAnchor(new LinkAnchor(self,event.layerX,event.layerY),true);}
 Link.prototype.leftclick = function(self,event){self.addAnchor(new LinkAnchor(self,event.layerX,event.layerY),true);}
 Link.prototype.mouseenter = function(self,event){ document.body.style.cursor = 'pointer';}
 Link.prototype.mouseleave = function(self,event){ document.body.style.cursor = 'default';}

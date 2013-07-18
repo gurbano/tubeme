@@ -45,6 +45,9 @@ function Link(line,stop1, stop2){
 	this.line = line;
 	this.stop1 = stop1;
 	this.stop2 = stop2;
+	this.init = function(){
+		
+	}
 	this.removeAnchor = function(anchorToDelete){
 		this.points.splice( this.points.indexOf(anchorToDelete) ,1);
 		anchorToDelete.obj.remove();
@@ -59,12 +62,11 @@ function Link(line,stop1, stop2){
 			this.points.push(this.points[size-1]);
 			this.points[size-1]=linkAnchor;
 			this.line.linksLayer.add(linkAnchor.obj);
-			this.refresh();
-			
-			
+			this.refresh();	
 		}	
 	}
-	this.addAnchor(new LinkAnchor(self,stop1.x(),stop1.y(), false));	
+	// Automatically add anchors on creation
+	this.addAnchor(new LinkAnchor(self,stop1.x(),stop1.y(), false));
 	this.addAnchor(new LinkAnchor(self,stop2.x(),stop2.y(), false));
 	this._id = function(){return this.line.id+"_"+this.stop1.id+"_"+this.stop2.id;}
 	this.id = this._id();
