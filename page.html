@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+	  .kineticjs-content{
+		border:1px dotted black;
+		border-left:0px dotted black;
+	  }
+	  #side{
+		width:100px;
+		height:768px;
+		background:white;
+		float:left;
+		border:1px dotted black;
+	  }
+    </style>
+  </head>
+  <body>
+	<div id="side"></div>
+    <div id="container">
+	</div>
+	
+	<script src="kinetic-v4.5.4.min.js"></script>
+	<script src="requestAnimationFrame.js"></script>
+	<script src="globals.js"></script>
+	<script src="model.js"></script>
+	<script src="grid.js"></script>
+	<script src="event.js"></script>	
+    <script defer="defer">
+	var $time = function() {return +new Date;};
+	var mode = 'ADD'; //ADD - DRAG - INFO
+	document.addEventListener('contextmenu', function(evt) { 
+	  evt.preventDefault();
+	}, false);
+	/*MAIN STAGE*/
+    var stage = new Kinetic.Stage({
+        container: 'container',
+        width: 800,
+        height: 800,
+		draggable:false
+    });
+	
+	
+	
+	
+
+	
+	
+	var stopsA = new Array();
+
+	var stopsB = new Array();
+
+
+	var metro = new Metro('Roma', stage);
+	var lineaA = metro.addLine('A','red');
+	var lineaB = metro.addLine('B','blue');
+	
+	
+	stopsA.push(lineaA.addStop("Battistini",80,80));
+	stopsA.push(lineaA.addStop("Cornelia",160,160));
+	var termini = lineaA.addStop("Termini",240,240)
+	stopsA.push(termini);
+	stopsA.push(lineaA.addStop("V.Emanuele",320,320));
+	stopsA.push(lineaA.addStop("Furio Camillo",360,360));
+	
+	
+	stopsB.push(lineaB.addStop("Laurentina",80,360));
+	stopsB.push(lineaB.addStop("Colosseo",160,320));
+	var termini = lineaB.pushStop(termini);
+	stopsB.push(lineaB.addStop("Bologna",360,160));	
+	stopsB.push(lineaB.addStop("Rebibbia",360,80));	
+	
+	
+	console.info(lineaA);
+	
+	
+	/*GLOBALS*/	
+	GLOBALS.grid = metro.grid;
+	
+	
+	var zoom = function(e) {
+	var zoomAmount = e.wheelDeltaY*0.0001;
+	console.info(metro.getScale().x+zoomAmount)
+	  metro.setScale(metro.getScale().x+zoomAmount);
+	}
+	//document.addEventListener("mousewheel", zoom, false);
+	
+	function draw() {
+		requestAnimationFrame(draw);
+			metro.stage.draw();
+	}
+	draw();
+	
+
+    </script>
+  </body>
+</html>
