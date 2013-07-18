@@ -61,6 +61,8 @@ LinkAnchor.prototype.rightclick = function(self,event){self.link.removeAnchor(se
 
 /*LINK*/
 Link.prototype.leftclick = function(self,event){self.addAnchor(new LinkAnchor(self,event.layerX,event.layerY),true);}
+Link.prototype.mouseenter = function(self,event){ document.body.style.cursor = 'pointer';}
+Link.prototype.mouseleave = function(self,event){ document.body.style.cursor = 'default';}
 
 /*POINTER*/
 Pointer.prototype.mousemove = function(self,event){var p = self.grid.snapToGrid(event.layerX,event.layerY);	self.pointer.setPosition(p.x,p.y);}
@@ -70,3 +72,5 @@ function middleclick(event,self){if (self.middleclick){self.middleclick(self,eve
 function leftclick(event,self){if (self.leftclick){self.leftclick(self,event);}else{console.warn('unhandled event: ', event, self);}};
 function rightclick(event,self){if (self.rightclick){self.rightclick(self,event);}else{console.warn('unhandled event: ', event, self);}};
 function mousemove(event,self){if (self.mousemove){self.mousemove(self,event);}else{console.warn('unhandled event: ', event, self);}};
+function mouseenter(event,self){if (self.mouseenter){self.mouseenter(self,event);}else{console.warn('unhandled event: ', event, self);}};
+function mouseleave(event,self){if (self.mouseleave){self.mouseleave(self,event);}else{console.warn('unhandled event: ', event, self);}};

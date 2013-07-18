@@ -152,7 +152,7 @@ function Stop(line, name,x,y){
 					}
 					context.lineWidth = LINK_WIDTH;
 					context.strokeStyle = self.lines[0].color;
-					context.stroke();
+					canvas.stroke(this);
 					self.drawName(context);
 					break;
 				case 'SIMPLE': 
@@ -161,6 +161,7 @@ function Stop(line, name,x,y){
 					context.closePath();
 					canvas.fillStroke(this);
 					self.drawName(context);
+					canvas.stroke(this);
 					break;
 				case 'END': 
 					context.beginPath();	
