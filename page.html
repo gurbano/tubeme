@@ -16,8 +16,7 @@
 		border:1px dotted black;
 	}
 	#side{
-		width:200px;
-		margin-right:-100px;
+		width:100px;
 		height:800px;
 		background:white;
 		float:left;
@@ -25,9 +24,10 @@
 		border-right:0px dotted black;
 	}
 	#side:hover{
-		//margin-right:0px;
+		
 	}
 	#side .badge{
+		display:block;
 		width: 100px;
 		float:left;
 		height:50px;		
@@ -39,6 +39,11 @@
 		-webkit-border-radius: 12px;
 		border-radius: 12px;
 		font-weight: bold;
+		
+		margin-bottom: 5px;
+		font-size: 140%;
+		font-weight: bold;
+		font-variant: small-caps;
 	}		
 	#side .badge p {
 		display: table-cell; 
@@ -59,6 +64,7 @@
   </head>
   <body>
 	<div id="side">
+		
 		<div id="addLineButton" class="badge btn"><p>+</p></div>
 	</div>
     <div id="container">
@@ -96,13 +102,19 @@
 		metro.draw();
 		
 		/*HTML UI*/
-		$('#modal-form-new-line').dialog({autoOpen:false});
+		$('#modal-form-new-line').dialog({autoOpen:false, position: { my: "left top", at: "right top", of: $('#side') }});
 		$('#modal-form-new-line-create-user').button();
 		$('#modal-form-new-line-create-user').click(function(){
-			var lineaA = metro.addLine($('#name').val(),$('#color').val());
+			var name=$('#name').val();
+			var color =$('#color').val();
+			var lineaA = metro.addLine(name,color);//create 
+			var badge = $('<div id="line_'+name+'" name="'+name+'" style="background: '+color+'" class="badge"><p>'+name+'</p></div>');
+			$("#side").append(badge);
+					
 			lineaA.addStop("Battistini",80,80);
 			lineaA.addStop("Cornelia",160,160);
-			return true;
+			
+			$('#modal-form-new-line').dialog( "close" );
 		});
 		
 		$('#addLineButton').click(function(event){			
