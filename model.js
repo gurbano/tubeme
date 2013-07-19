@@ -298,6 +298,7 @@ function Metro(name, stage){
 	var self = this;
 	this.stage = stage;
 	this.name = name;
+	this.stateManager = new StateManager();
 	this.lines = {};
 	/*GRID*/
 	this.backLayer = new Kinetic.Layer();
@@ -312,7 +313,12 @@ function Metro(name, stage){
 		return tmp;
 	}
 	this.getLine = function(name){return lines[name];}	
+	this.stateManager.changeState(StateEnum.START);
 	//setInterval(function(){stage.draw();},1000/60);
+	this.draw = function () {
+		requestAnimationFrame(self.draw);
+		self.stage.draw();
+	}
 }
 
 

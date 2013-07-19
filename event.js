@@ -49,25 +49,6 @@ GLOBALS.el = new EventListener();
 GLOBALS.bind = function(eventName,target,context){target.on(eventName, function(event){GLOBALS.el.event(eventName, event, context);})}
 
 
-/*STOP*/
-Stop.prototype.dragend = function(self,event){
-	GLOBALS.grid.snapObject(self.obj);
-	self.forEachLine(function(line,context){line.stopDragged(context);});
-}
-Stop.prototype.leftclick = function(self,event){};
-/*LINK ANCHOR*/
-LinkAnchor.prototype.dragend = function(self,event){self.link.refresh();} //Redraw the link once the control point is dragged around
-LinkAnchor.prototype.rightclick = function(self,event){self.link.removeAnchor(self);} //Remove the anchor
-
-/*LINK*/
-Link.prototype.rightclick = function(self,event){self.addAnchor(new LinkAnchor(self,event.layerX,event.layerY),true);}
-Link.prototype.leftclick = function(self,event){self.addAnchor(new LinkAnchor(self,event.layerX,event.layerY),true);}
-Link.prototype.mouseenter = function(self,event){ document.body.style.cursor = 'pointer';}
-Link.prototype.mouseleave = function(self,event){ document.body.style.cursor = 'default';}
-
-/*POINTER*/
-Pointer.prototype.mousemove = function(self,event){var p = self.grid.snapToGrid(event.layerX,event.layerY);	self.pointer.setPosition(p.x,p.y);}
-
 function dragend(event,self){if (self.dragend){self.dragend(self,event);}else{console.warn('unhandled event: ', event, self);}};
 function middleclick(event,self){if (self.middleclick){self.middleclick(self,event);}else{console.warn('unhandled event: ', event, self);}};
 function leftclick(event,self){if (self.leftclick){self.leftclick(self,event);}else{console.warn('unhandled event: ', event, self);}};
